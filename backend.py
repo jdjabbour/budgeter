@@ -10,26 +10,52 @@
 import sys
 import sqlite3
 
-def create_table():
-    pass
 
-def insert_date():
-    pass
+class Scrub_input():
 
-def update_data():
-    pass
+    def __init__(self, item, amount, debit_credit, date):
+        self.item = item
+        self.amount = amount
+        self.debit_credit = debit_credit
+        self.date = date
 
-def view_data():
-    pass
+    def scrub_item(self):
+        self.item = self.item.lower()
+        return self.item
 
-def delete_data():
-    pass
+    def scrub_amount(self):
+        self.amount = format(self.amount, '.2f')
+        self.amount = float(self.amount)
+        return self.amount
+
+    def scrub_debit_credit(self):
+        pass
+
+    def scub_date(self):
+        pass
+
+class Database_functions():
+
+    def create_table(self):
+        pass
+
+    def insert_date(self):
+        pass
+
+    def update_data(self):
+        pass
+
+    def view_data(self):
+        pass
+
+    def delete_data(self):
+        pass
 
 def main(dev_mode, item, amount, debit_credit, date):
 
-
-    return item, amount, debit_credit, date
-
+    sc = Scrub_input(item, amount, debit_credit, date)
+    item = sc.scrub_item()
+    amount = sc.scrub_amount()
 
 
 
@@ -45,8 +71,6 @@ if __name__ == "__main__":
         dev_mode = 0
 
     item = input("What is the item? ")
-    item = str(item)
-    item = item.lower()
 
     amount = input("What is the amount? ")
     amount = float(amount) # Make sure this goes to second decimal place

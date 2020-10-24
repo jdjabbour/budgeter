@@ -1,32 +1,42 @@
 # Python3
 # test_backend.py
 
+# pytest -v -m <marker name>
+
 import pytest
 import backend as be
 
 @pytest.fixture
-def VAR():
-    item = "food"
-    amount = 15.00
-    date = '10/15/2020'
-    return item, amount, date
+def VARS():
+    item = "Food"
+    amount = 15.0
+    debit_credit = 'DEbit'
+    date = '10/24/2020'
 
-def test_main_item(VAR):
-    item  = VAR[0]
-    dev_mode = 1
-    result = be.main(dev_mode, item, amount, date)
-    assert result[0] == item
+    sc = be.Scrub_input(item, amount, debit_credit, date)
 
-def test_main_amount():
+    return sc
 
-    dev_mode = 1
-    result = be.main(dev_mode, item, amount, date)
-    assert result[1] == 15.00
+@pytest.mark.run
+def test_scrub_item(VARS):
+    item = VARS.scrub_item()
+    assert item == 'food'
+    
+@pytest.mark.run
+def test_scrub_amount(VARS):
+    amount = VARS.scrub_amount()
+    assert amount == 15.00
 
-def test_main_date():
-    item = "food"
-    amount = 15.00
-    date = '10/15/2020'
-    dev_mode = 1
-    result = be.main(dev_mode, item, amount, date)
-    assert result[2] == '10/15/2020'
+def test_scrub_debit(VARS):
+    debit = VARS.scrub_scrub_debit()
+    assert debit == 'debit'
+
+def test_debit_amount():
+    pass
+
+def test_scrub_credit():
+    pass
+
+def test_credit_amount():
+    pass
+
